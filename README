@@ -1,0 +1,28 @@
+
+************************************************************************
+* Table of Content
+************************************************************************
+
+.vimrc
+# a file that stores your vim configurations
+
+************************************************************************
+* COMMITTING AND PUSHING FILES ON GITHUB
+************************************************************************
+
+-COMMITTING-
+
+$ git add FILENAME
+# Stages your file, adding it to the list of files to be committed
+
+$ git commit -m 'comment'
+# Commit your file with a comment
+
+-PUSHING-
+
+$ git remote add origin https://github.com/yujinred/wormhole.git
+# Create a remote named "origin" pointing at your GitHub repository
+
+$ git push origin master
+# Send your commits in the "master" branch to GitHub
+
