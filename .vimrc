@@ -2,11 +2,23 @@
 " Global Settings
 "----------------------------------------------------------
 
-" colorscheme
-colorscheme torte
+" Set colorscheme (default for fixing some commands)
+colorscheme default
+
+" backspace fixes
+set bs=2
+
+" Rebind <Leader> key
+let mapleader = ","
+
+" Highlight column 80
+" set colorcolumn=80
+" highlight ColorColumn ctermbg=233
+
 
 " Set line numbers
 set number
+
 
 " Set free navigation
 set virtualedit=all
@@ -20,6 +32,8 @@ filetype indent on
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+set shiftround
+set expandtab
 
 " set the search scan to wrap lines
 set wrapscan
@@ -85,7 +99,7 @@ autocmd BufReadPost *
 set viminfo^=%
 
 " Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ Line:%l/%L[%p%%]\ \ \ Col:\ %v
+" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ Line:%l/%L[%p%%]\ \ \ Col:\ %v
 " CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
 " Delete trailing white space on save for python/CoffeeScript
@@ -95,7 +109,7 @@ func! DeleteTrailingWS()
     exe "normal `z"
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
+        autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 "----------------------------------------------------------
 " Mappings
@@ -114,6 +128,38 @@ imap jj <esc>
 map j gj
 map k gk
 
+" Quicksave command
+noremap <C-Z> :update<CR>
+vnoremap <C-Z> <C-C>:update<CR>
+inoremap <C-Z> <C-O>:update<CR>
+
+" SPLITS
+" bind Ctrl+<movement> keys to move around the windows
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+
+" TABS
+" easier moving between tabs
+map <Leader>n <esc>:tabprevious<CR>
+map <Leader>m <esc>:tabnext<CR>
+
+"map sort function to a key
+vnoremap <Leader>s :sort<CR>
+
+" Better indentation moving around in visual mode
+vnoremap < <gv
+vnoremap > >gv
+
+" Disable vi-compatibility
+set nocompatible
+
+" Set encoding
+set encoding=utf-8
+
+" Explicitly tell Vim that the terminal supports 256 colors
+set t_Co=256
 
 "----------------------------------------------------------
 " Helper Function
@@ -126,3 +172,41 @@ function! HasPaste()
     return ''
 endfunction
 
+"----------------------------------------------------------
+" Plugins Configuration
+"----------------------------------------------------------
+
+" Activate Pathogen Plugin for Vim
+call pathogen#infect()
+call pathogen#helptags() " generate helptags for everything in 'runtimepath'
+
+" Settings for python-mode
+
+" Settings for jedi-vim
+
+" Settings for Powerline
+let g:Powerline_symbols = 'fancy'
+
+" Settings for taglist 
+nnoremap <silent> <F8> :TlistToggle<CR>
+let Tlist_Auto_Open = 1 
+let Tlist_Exit_OnlyWindow = 1 
+
+" Better navigating through omnicomplete option list
+set completeopt=longest,menuone
+function! OmniPopup(action)
+    if pumvisible()
+        if a:action == 'j'
+            return "\<C-N>"
+        elseif a:action == 'k'
+            return "\<C-P>"
+        endif
+    endif
+    return a:action
+endfunction
+
+inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
+inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
+
+" settings for Python folding
+set nofoldenable
