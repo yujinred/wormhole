@@ -3,7 +3,7 @@
 "----------------------------------------------------------
 
 " Set colorscheme (default for fixing some commands)
-colorscheme default
+colorscheme darkblue 
 
 " backspace fixes
 set bs=2
@@ -177,36 +177,36 @@ endfunction
 "----------------------------------------------------------
 
 " Activate Pathogen Plugin for Vim
-call pathogen#infect()
-call pathogen#helptags() " generate helptags for everything in 'runtimepath'
+" call pathogen#infect()
+" call pathogen#helptags() " generate helptags for everything in 'runtimepath'
 
 " Settings for python-mode
 
 " Settings for jedi-vim
 
 " Settings for Powerline
-let g:Powerline_symbols = 'fancy'
+" let g:Powerline_symbols = 'fancy'
 
 " Settings for taglist 
-nnoremap <silent> <F8> :TlistToggle<CR>
-let Tlist_Auto_Open = 1 
-let Tlist_Exit_OnlyWindow = 1 
+" nnoremap <silent> <F8> :TlistToggle<CR>
+" let Tlist_Auto_Open = 1 
+" let Tlist_Exit_OnlyWindow = 1 
 
 " Better navigating through omnicomplete option list
-set completeopt=longest,menuone
-function! OmniPopup(action)
-    if pumvisible()
-        if a:action == 'j'
-            return "\<C-N>"
-        elseif a:action == 'k'
-            return "\<C-P>"
-        endif
-    endif
-    return a:action
-endfunction
+" set completeopt=longest,menuone
+" function! OmniPopup(action)
+"    if pumvisible()
+"        if a:action == 'j'
+"            return "\<C-N>"
+"        elseif a:action == 'k'
+"            return "\<C-P>"
+"        endif
+"    endif
+"    return a:action
+"endfunction
 
-inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
-inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
+"inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
+"inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 
 " settings for Python folding
-set nofoldenable
+" set nofoldenable
